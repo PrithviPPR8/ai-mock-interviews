@@ -1,3 +1,5 @@
+"use server";
+
 import { feedbackSchema } from "@/constants";
 import { db } from "@/firebase/admin";
 import { google } from "@ai-sdk/google";
@@ -31,7 +33,7 @@ export async function getInterviewsById(id: string): Promise<Interview | null> {
 }
 
 export async function createFeedback(params: CreateFeedbackParams) {
-    const { interviewId, userId, transcript } = params;
+    const { interviewId, userId, transcript, feedbackId } = params;
 
     try{
         const formattedTranscript = transcript.map((sentence: { role: string; content: string; }) => (
@@ -69,10 +71,19 @@ export async function createFeedback(params: CreateFeedbackParams) {
             createdAt: new Date().toISOString()
         })
 
+        let feedbackRef;
+
+        if (feedbackId) {
+        feedbackRef = db.collection("feedback").doc(feedbackId);
+        } else {
+        feedbackRef = db.collection("feedback").doc();
+        }
+
+        await feedbackRef.set(feedback);
+
         return {
             success: true,
             feedbackId: feedback.id
-
         }
 
     } catch(e){

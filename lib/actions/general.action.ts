@@ -10,7 +10,7 @@ export async function getInterviewsByUserId(userId: string): Promise<Interview[]
 
     return interviews.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
     })) as Interview[];
 }
 

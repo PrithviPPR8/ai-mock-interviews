@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
         const interview = {
             role, type, level,
-            techstack: techstack.split(','),
+            techstack: techstack.split(","),
             questions: JSON.parse(questions),
             userId: userid,
             finalized: true,
@@ -42,8 +42,8 @@ export async function POST(request: Request) {
 
         return Response.json({ success: true }, {status: 200})
     } catch(error){
-        console.error(error);
+        console.error("Error:", error);
 
-        return Response.json({ success: false, error}, {status: 500});
+        return Response.json({ success: false, error: error}, {status: 500});
     }
 }

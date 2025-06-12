@@ -59,11 +59,7 @@ const Agent = ({ userName, userId, type, interviewId, feedbackId, questions }: A
         vapi.off('speech-end', onSpeechEnd);
         vapi.off('error', onError);
     }
-  }, [])
-
-  
-
-  
+  }, [])  
 
   useEffect(() => {
 
@@ -129,7 +125,6 @@ const Agent = ({ userName, userId, type, interviewId, feedbackId, questions }: A
 
   const handleDisconnect = async () => {
     setCallStatus(CallStatus.FINISHED);
-
     vapi.stop();
   }
 

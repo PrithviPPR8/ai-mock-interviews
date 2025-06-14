@@ -7,7 +7,7 @@ import Link from "next/link";
 import DisplayTechIcons from "./DisplayTechIcons";
 import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
-const InterveiwCard = async ({ id, userId, role, type, techstack, createdAt}: InterviewCardProps) => {
+const InterviewCard = async ({ id, userId, role, type, techstack, createdAt}: InterviewCardProps) => {
 
   const feedback = userId && id ? await getFeedbackByInterviewId({ interviewId: id, userId}) : null; 
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
@@ -65,4 +65,4 @@ const InterveiwCard = async ({ id, userId, role, type, techstack, createdAt}: In
   )
 }
 
-export default InterveiwCard
+export default InterviewCard
